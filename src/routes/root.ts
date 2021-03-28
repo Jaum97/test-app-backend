@@ -1,7 +1,7 @@
 import { FastifyPluginAsync } from 'fastify'
 
 const root: FastifyPluginAsync = async (fastify): Promise<void> => {
-    fastify.get('/', async function (request) {
+    fastify.get('/root', async function (request) {
         fastify.log.info(request.body)
 
         return { root: true }

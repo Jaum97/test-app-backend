@@ -15,6 +15,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
     fastify,
     opts,
 ): Promise<void> => {
+    void fastify.register(require('fastify-cors'))
     // This loads all plugins defined in plugins
     // those should be support plugins that are reused
     // through your application
