@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
+  "engines": {
+    "node": "12.18.2"
+  },
   "directories": {
     "test": "test"
   },
