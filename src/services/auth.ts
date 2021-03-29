@@ -12,13 +12,13 @@ export const attemptLogin = async (login: string, password: string) => {
     const [DBUser] = await UserModel.find({ $or }, '+password').lean()
 
     if (!DBUser?.password) {
-        throw Error('Usuário ou senha incorretos')
+        throw Error('incorrect user or password')
     }
 
     const matchesPassword = await compare(password, DBUser.password)
 
     if (!matchesPassword) {
-        throw Error('Usuário ou senha incorretos')
+        throw Error('incorrect user or password')
     }
 
     const { _id: id } = DBUser
@@ -37,7 +37,7 @@ export const attemptLogin = async (login: string, password: string) => {
     const doc = await new RefreshTokenModel(obj).save()
 
     if (!doc) {
-        throw Error('Falha ao salvar token')
+        throw Error('Error while saving token')
     }
 
     return omit(['password', 'updatedAt', '__v', 'createdAt'], {
@@ -57,7 +57,7 @@ export const verifyJWT = async (token: string) => {
         }) as unknown) as boolean
 
         if (!isValid) {
-            throw Error('Token expirado')
+            throw Error('Token expired')
         }
 
         const { SUCCESS, APPLICATION_EXCEPTION } = HttpCodes

@@ -6,6 +6,7 @@ import {
     deleteUser,
     editUser,
     findAllUsers,
+    findAllUsersThatAreNotRequestor,
     findUser,
 } from '../../services/user'
 
@@ -18,6 +19,12 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         const { id } = request?.params as typeof request.params & { id: string }
 
         return findUser(id)
+    })
+
+    fastify.get('/requestor/:id', async function (request) {
+        const { id } = request?.params as typeof request.params & { id: string }
+
+        return findAllUsersThatAreNotRequestor(id)
     })
 
     fastify.patch('/:id', async function (request) {
